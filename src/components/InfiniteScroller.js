@@ -10,16 +10,15 @@ const InfiniteScroller = (props) => {
   };
 
   useEffect(() => {
-    if (props.shouldDisconnect) {
+    let observer;
+    if (!props.shouldDisconnect) {
+      observer = new IntersectionObserver(observerCallback, {
+        threshold: 1.0,
+      });
+      observer.observe(observerRef.current);
+    } else {
       observerRef.current.innerText = 'All Products Loaded';
     }
-  }, [props.shouldDisconnect]);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(observerCallback, {
-      threshold: 1.0,
-    });
-    observer.observe(observerRef.current);
     return () => observer.disconnect();
   }, [props.shouldDisconnect]);
   return (

@@ -8,9 +8,16 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
   grid-auto-rows: minmax(100px, auto);
+  margin-bottom: 10px;
 }
 
 .product-container{
   border: 1px solid black;
   padding: 5px;
+  min-height: 300px;
+}
+.empty-page{
+  height: 1278px;
+  width: 100%;
+  margin-bottom: 10px;
 }

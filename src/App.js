@@ -1,7 +1,7 @@
 import './App.css';
 import InfiniteScroller from './components/InfiniteScroller';
 import { getData } from './api';
-import Product from './components/Product';
+import ProductPage from './components/ProductPage';
 import { useState } from 'react';
 
 function App() {
@@ -13,7 +13,10 @@ function App() {
       console.log('calling next page');
       setDataLoading(true);
       getData().then((res) => {
-        setData((currData) => [...currData, ...res.data]);
+        setData((currData) => {
+          currData.push({ data: res.data, isVisible: true });
+          return currData;
+        });
         setDataLoading(false);
         if (res.done) {
           setDataLoaded(true);
@@ -24,9 +27,9 @@ function App() {
   return (
     <div className='App'>
       <InfiniteScroller callback={loadNextPage} shouldDisconnect={dataLoaded}>
-        <div className='grid'>
-          {data.map((prod, idx) => (
-            <Product key={idx} product={prod}></Product>
+        <div>
+          {data.map((prodPage, idx) => (
+            <ProductPage productPage={prodPage} key={idx}></ProductPage>
           ))}
         </div>
       </InfiniteScroller>

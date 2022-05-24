@@ -3,8 +3,8 @@ import React from 'react';
 const Product = ({ product }) => {
   return (
     <div className='product-container'>
-      <img src={product.image} width='100px' alt='product'></img>
-      <div>{product.title}</div>
+      <img src={product.image} height='200px' alt='product'></img>
+      <div className='product-description'>{product.title}</div>
     </div>
   );
 };
